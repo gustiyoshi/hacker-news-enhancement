@@ -26,8 +26,6 @@ The default Hacker News design is functional but can be harsh, especially during
 - **Better Typography:** Adjusted font sizes and line heights for optimal readability.
 - **Clean Layout:** Comments and threads are spaced out to prevent that "wall of text" feeling.
 
-***
-
 ## How to Install
 
 You can use this theme on any desktop browser (Chrome, Firefox, Edge, Safari). The easiest way is to use a browser extension called **Stylus**.
@@ -44,15 +42,14 @@ First, you need an extension that allows you to add custom styles to websites.
 2.  Click on the **Stylus icon** in your browser toolbar.
 3.  Click the link that says **"Write style for: news.ycombinator.com"**.
 4.  A new tab will open with a code editor.
-5.  **Copy** the CSS code from the file in this repository.
+5.  **Copy** the [CSS code](/style.css) from the file in this repository.
 6.  **Paste** it into the main text box in Stylus.
 7.  Give it a name on the left (e.g., "Hacker News Enhancement").
 8.  Click **Save**.
+9.  Strongly suggested: enable **Instant inject mode** in Stylus Advanced options to prevent white flashes when pages load.
 
 ### Step 3: Enjoy!
 Go back to Hacker News and refresh the page. The new theme will be applied immediately.
-
-***
 
 ## Contribute
 
