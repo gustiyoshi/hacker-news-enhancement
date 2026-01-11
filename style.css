@@ -1,0 +1,606 @@
+/* ============================================
+   1. TOKENS & VARIABLES
+   ============================================ */
+:root {
+  /* --- COLORS (Dark Mode) --- */
+  --hn-bg-primary: #121212;
+  --hn-text-primary: #d7dadc;
+  --hn-text-secondary: #818384;
+  --hn-text-tertiary: #5a5a5a;
+  
+  --hn-accent: #ff6600;
+  --hn-accent-hover: #ff8533;
+  
+  --hn-link-primary: #6ba3ff;
+  --hn-link-visited: #9270ca;
+  --hn-link-hover: #ff8533;
+  
+  --hn-border: rgba(128, 128, 128, 0.2);
+  --hn-code-bg: #0d0d0d;
+  --hn-code-text: #e0e0e0;
+
+  /* --- TYPOGRAPHY (REM-based, 16px base) --- */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  
+  --leading-standard: 1.6;
+
+  --font-regular: 400;
+  --font-semibold: 600;
+  
+  /* --- SPACING (4px Scale) --- */
+  --space-05: 2px;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+
+  /* --- UI --- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --border-thin: 1px;
+  --border-thick: 2px;
+}
+
+/* Light Mode Support */
+@media (prefers-color-scheme: light) {
+  :root {
+    --hn-bg-primary: #ffffff;
+    --hn-text-primary: #1f2121;
+    --hn-text-secondary: #666666;
+    --hn-text-tertiary: #999999;
+    --hn-link-primary: #0066cc;
+    --hn-link-visited: #551a8b;
+    --hn-link-hover: #0052a3;
+  }
+}
+
+/* ============================================
+   2. BASE STYLES (ORIGINAL SELECTORS)
+   ============================================ */
+
+html {
+  font-size: 100%;
+  line-height: var(--leading-standard);
+  color-scheme: dark light;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Verdana, Geneva, sans-serif;
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--hn-text-primary);
+  background-color: var(--hn-bg-primary);
+  margin: 0;
+  padding: 0;
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+/* Improve Verdana fallback */
+body, td, input, textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Verdana, Geneva, sans-serif;
+  font-weight: var(--font-regular);
+}
+
+/* ============================================
+   3. CORE ELEMENTS
+   ============================================ */
+
+td {
+  font-family: inherit;
+  font-size: var(--text-base);
+  color: var(--hn-text-primary);
+  font-weight: var(--font-regular);
+}
+
+.admin td {
+  font-size: var(--text-xs);
+  color: var(--hn-text-primary);
+  font-weight: var(--font-regular);
+}
+
+.subtext td {
+  font-size: var(--text-xs);
+  color: var(--hn-text-secondary);
+  opacity: 0.8;
+}
+
+/* ============================================
+   4. THREAD LIST SPACING
+   ============================================ */
+
+/* Increase height of spacer rows between threads */
+tr.spacer {
+  height: var(--space-2) !important;
+}
+
+/* Add background color to spacers for visual separation */
+tr.spacer td {
+  background-color: var(--hn-bg-primary);
+}
+
+/* ============================================
+   5. FORM ELEMENTS
+   ============================================ */
+
+input {
+  font-family: "SF Mono", Monaco, Menlo, monospace;
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--hn-text-primary);
+  background-color: var(--hn-bg-primary);
+  border: var(--border-thin) solid var(--hn-border);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+input[type='submit'], input[type='button'] {
+  font-family: inherit;
+  background-color: var(--hn-accent);
+  color: #ffffff;
+  border: none;
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-semibold);
+  transition: background-color 150ms ease;
+}
+
+input[type='submit']:hover, input[type='button']:hover {
+  background-color: var(--hn-accent-hover);
+}
+
+input[type='submit']:focus, input[type='submit']:focus-visible {
+  outline: var(--border-thick) solid var(--hn-accent);
+  outline-offset: var(--space-05);
+}
+
+input:focus, textarea:focus {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+  border-color: var(--hn-link-primary);
+}
+
+textarea {
+  font-family: "SF Mono", Monaco, Menlo, monospace;
+  font-size: var(--text-base);
+  font-weight: var(--font-regular);
+  color: var(--hn-text-primary);
+  background-color: var(--hn-bg-primary);
+  border: var(--border-thin) solid var(--hn-border);
+  padding: var(--space-2);
+  resize: vertical;
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+  transition: border-color 150ms ease;
+}
+
+/* ============================================
+   6. TEXT CLASSES
+   ============================================ */
+
+.default {
+  font-size: var(--text-base);
+  color: var(--hn-text-primary);
+  font-weight: var(--font-regular);
+}
+
+.default p {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-standard);
+}
+
+.admin {
+  font-size: var(--text-xs);
+  color: var(--hn-text-primary);
+  font-weight: var(--font-regular);
+}
+
+.title {
+  font-size: var(--text-base);
+  color: var(--hn-text-primary);
+  overflow: hidden;
+  word-break: break-word;
+  line-height: var(--leading-standard);
+  font-weight: var(--font-regular);
+  max-width: 600px;
+  margin: 0;
+  padding: 0;
+}
+
+.subtext {
+  font-size: var(--text-xs);
+  color: var(--hn-text-secondary);
+  opacity: 0.75;
+  line-height: var(--leading-standard);
+  margin: var(--space-1) 0 0 0;
+  padding: var(--space-1) 0 var(--space-2) 0;
+}
+
+.yclinks {
+  font-size: var(--text-xs);
+  color: var(--hn-text-secondary);
+}
+
+.pagetop {
+  font-size: var(--text-base);
+  color: #ffffff;
+  line-height: var(--leading-standard);
+  font-weight: var(--font-regular);
+  background-color: var(--hn-accent);
+}
+
+.pagetop b {
+  font-weight: var(--font-regular);
+  color: #ffffff;
+}
+
+.comhead {
+  font-size: var(--text-xs);
+  color: var(--hn-text-secondary);
+  font-weight: var(--font-regular);
+}
+
+.comment {
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--hn-text-primary);
+  line-height: var(--leading-standard);
+  letter-spacing: 0.2px;
+  font-weight: var(--font-regular);
+  max-width: 600px;
+  padding: var(--space-2) 0 var(--space-3) 0;
+}
+
+.hnname {
+  margin-left: 1px;
+  margin-right: 5px;
+  font-weight: var(--font-regular);
+}
+
+/* ============================================
+   7. LINKS - WCAG COMPLIANT
+   ============================================ */
+
+/* ===== PAGETOP NAV LINKS ===== */
+.pagetop a:link {
+  color: #ffffff !important;
+  text-decoration: none;
+  text-underline-offset: var(--space-05) !important;
+}
+
+.pagetop a:visited {
+  color: #ffffff !important;
+  text-decoration: none;
+  text-underline-offset: var(--space-05) !important;
+}
+
+.pagetop a:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-underline-offset: var(--space-05) !important;
+}
+
+.pagetop a:active {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-underline-offset: var(--space-05) !important;
+}
+
+.pagetop a:focus-visible {
+  outline: var(--border-thick) solid #ffffff;
+  outline-offset: var(--space-05);
+  color: #ffffff !important;
+  text-underline-offset: var(--space-05) !important;
+}
+
+/* ===== CONTENT AREA LINKS ===== */
+a:link {
+  color: var(--hn-link-primary);
+  text-decoration: underline;
+  text-decoration-thickness: var(--border-thin);
+  text-underline-offset: var(--space-05);
+  transition: color 150ms ease, text-decoration-thickness 150ms ease;
+}
+
+a:visited {
+  color: var(--hn-link-visited);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--hn-link-hover);
+  text-decoration-thickness: var(--border-thick);
+}
+
+a:active {
+  color: var(--hn-link-hover);
+}
+
+a:focus-visible {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+  border-radius: var(--radius-sm);
+}
+
+/* ===== SPECIFIC CONTENT LINK RULES ===== */
+
+.title a {
+  word-break: break-word;
+  color: inherit;
+  text-decoration: none;
+}
+
+.title a:hover {
+  color: var(--hn-link-hover);
+  text-decoration: underline;
+}
+
+.title a:visited {
+  color: var(--hn-link-visited);
+}
+
+.subtext a:link, 
+.subtext a:visited {
+  color: var(--hn-link-primary);
+  text-decoration: none;
+}
+
+.subtext a:hover {
+  text-decoration: underline;
+  color: var(--hn-link-hover);
+}
+
+.subtext a:focus-visible {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+}
+
+.comhead a:link, 
+.comhead a:visited {
+  color: var(--hn-link-primary);
+  text-decoration: none;
+}
+
+.comhead a:hover {
+  text-decoration: underline;
+  color: var(--hn-link-hover);
+}
+
+.comhead a:focus-visible {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+}
+
+.hnmore a:link, 
+.hnmore a:visited {
+  color: var(--hn-link-primary);
+  text-decoration: underline;
+}
+
+.hnmore a:hover {
+  color: var(--hn-link-hover);
+}
+
+.hnmore a:focus-visible {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+}
+
+/* ============================================
+   8. REPLY LINK STYLING
+   ============================================ */
+
+div.comment div.reply a:link,
+div.comment div.reply a:visited {
+  color: var(--hn-link-primary);
+  text-decoration: none !important;
+}
+
+div.comment div.reply a:hover {
+  color: var(--hn-link-hover);
+  text-decoration: underline;
+}
+
+div.comment div.reply a:focus-visible {
+  outline: var(--border-thick) solid var(--hn-link-primary);
+  outline-offset: var(--space-05);
+}
+
+/* ============================================
+   9. COLOR CLASSES
+   ============================================ */
+
+.c00, .c00 a:link {
+  color: var(--hn-text-primary);
+  font-weight: var(--font-regular);
+}
+
+.c5a, .c5a a:link, .c5a a:visited { color: #6a6a6a; opacity: 0.8; }
+.c73, .c73 a:link, .c73 a:visited { color: #7a7a7a; opacity: 0.75; }
+.c82, .c82 a:link, .c82 a:visited { color: var(--hn-text-secondary); opacity: 0.7; }
+.c88, .c88 a:link, .c88 a:visited { color: #8a8a8a; opacity: 0.65; }
+.c9c, .c9c a:link, .c9c a:visited { color: #9c9c9c; opacity: 0.6; }
+.cae, .cae a:link, .cae a:visited { color: #aeaeae; opacity: 0.55; }
+.cbe, .cbe a:link, .cbe a:visited { color: #bebebe; opacity: 0.5; }
+.cce, .cce a:link, .cce a:visited { color: #cecece; opacity: 0.45; }
+.cdd, .cdd a:link, .cdd a:visited { color: #dddddd; opacity: 0.4; }
+
+/* ============================================
+   10. CODE BLOCKS
+   ============================================ */
+
+pre {
+  background-color: var(--hn-code-bg);
+  color: var(--hn-code-text);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  border: var(--border-thin) solid var(--hn-border);
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: "SF Mono", Monaco, Menlo, monospace;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin: var(--space-2) 0;
+  max-width: 600px;
+}
+
+pre:hover {
+  overflow: auto;
+}
+
+code {
+  font-family: "SF Mono", Monaco, Menlo, monospace;
+  color: var(--hn-code-text);
+  background-color: rgba(13, 13, 13, 0.4);
+  padding: var(--space-05) var(--space-1);
+  border-radius: var(--radius-sm);
+  font-size: 0.95em;
+  font-weight: var(--font-regular);
+}
+
+/* ============================================
+   11. COMMENT SPACING & UTILITIES
+   ============================================ */
+
+div.commtext {
+  line-height: var(--leading-standard);
+}
+
+div.commtext p:first-of-type {
+  padding-top: var(--space-3);
+}
+
+div.commtext p {
+  margin: 0;
+  padding-bottom: var(--space-3);
+}
+
+.noshow { display: none; }
+.nosee { visibility: hidden; pointer-events: none; cursor: default; }
+
+.votearrow {
+  width: 10px; height: 10px; border: 0;
+  margin: 3px 2px 6px;
+  background: url("triangle.svg") no-repeat;
+  background-size: 10px;
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+  cursor: pointer;
+}
+
+.votearrow:hover { opacity: 1; }
+.votearrow.rotate180 { transform: rotate(180deg); }
+.votelinks.nosee div.votearrow.rotate180 { display: none; }
+
+table.padtab td { padding: 0 10px; }
+
+#hnmain {
+  min-width: 796px;
+  background-color: var(--hn-bg-primary);
+}
+
+.pagebreak { page-break-before: always; }
+
+/* ============================================
+   12. RESPONSIVE DESIGN (MOBILE)
+   ============================================ */
+
+@media only screen and (min-width: 300px) and (max-width: 750px) {
+  #hnmain { width: 100%; min-width: 0; }
+  body { padding: 0; margin: 0; width: 100%; }
+  td { height: inherit !important; }
+
+  .title, .comment {
+    font-size: var(--text-base);
+    line-height: var(--leading-standard);
+    max-width: 100%;
+  }
+
+  span.pagetop {
+    display: block;
+    margin: 3px 5px;
+    font-size: var(--text-xs);
+    line-height: 1.4;
+  }
+
+  span.pagetop b {
+    display: block;
+    font-size: 15px;
+    font-weight: var(--font-regular);
+  }
+
+  table.comment-tree .comment a {
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+  }
+
+  img[src='s.gif'] { width: 12px; }
+
+  .title {
+    font-size: var(--text-lg);
+    line-height: var(--leading-standard);
+  }
+
+  .subtext { font-size: var(--text-sm); }
+
+  /* Mobile Columns */
+  td.votelinks {
+    width: var(--space-8);
+    padding-right: var(--space-1);
+  }
+
+  span.rank {
+    display: inline-block;
+    width: var(--space-6);
+    text-align: right;
+    margin-right: 3px;
+  }
+
+  .votearrow {
+    transform: scale(1.0);
+    margin: 2px 2px 4px 0;
+  }
+
+  .votearrow.rotate180 { transform: rotate(180deg); }
+
+  td.title { padding-left: var(--space-1); }
+  tr.athing td { padding-bottom: var(--space-1); }
+  tr.spacer { height: var(--space-4) !important; }
+
+  .votelinks { min-width: 18px; }
+  .votelinks a { display: block; margin-bottom: 9px; }
+
+  input[type='text'], input[type='number'], textarea {
+    font-size: var(--text-base);
+    width: 90%;
+  }
+
+  .comment { max-width: 100%; overflow-wrap: anywhere; }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 509px) {
+  .comment { max-width: 100%; overflow-wrap: anywhere; }
+}
+
+/* ============================================
+   13. PRINT STYLES
+   ============================================ */
+
+@media print {
+  body { background-color: #ffffff; color: #000000; }
+  a { color: #0066cc; text-decoration: underline; }
+  pre, code { background-color: #f5f5f5; color: #000000; }
+}
